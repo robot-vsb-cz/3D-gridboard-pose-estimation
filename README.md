@@ -12,8 +12,8 @@ Based on OpenCV ArUco tag detection.
 For generate ArUco tag, you can used online generator: https://chev.me/arucogen/
 
 <p align="center">
-  <img src="images/Gridboard.jpg" width="350">
-  <img src="images/DetectedGridboard.png" width="350" >
+  <img src="images/Gridboard.jpg" height="350">
+  <img src="images/DetectedGridboard.png" height="350" >
 </p>
 
 
