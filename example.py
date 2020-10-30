@@ -1,8 +1,7 @@
-from Aruco import ArucoDetector as aruco
+from GridboardLib.Aruco import ArucoDetector as aruco
 import numpy as np
 import cv2.aruco as aru
 import pyrealsense2 as rs
-import time
 import cv2
 
 
