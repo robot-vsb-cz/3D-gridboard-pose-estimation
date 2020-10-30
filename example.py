@@ -1,14 +1,15 @@
-from GridboardLib.Aruco import ArucoDetector as aruco
+from GridboardLib.Aruco import ArucoDetector as arucoDetector
+
 try:
     import numpy as np
     import cv2.aruco as aru
     import cv2
-    a = 5/0
     import pyrealsense2 as rs
 except:
     print("Global import Error")
-# for RealSense Cameras
+
 try:
+    # for RealSense Cameras
     ctx = rs.context()
     idCam = ctx.devices[0].get_info(rs.camera_info.serial_number)
     pipeline = rs.pipeline(ctx)
@@ -17,17 +18,13 @@ try:
     config.enable_stream(rs.stream.color, 1280, 720, rs.format.bgr8, 30)
     pipeline.start(config)
 except:
+    # General Camera
     capture = cv2.VideoCapture(1)
     capture.set(cv2.CAP_PROP_FRAME_HEIGHT, 720)
     capture.set(cv2.CAP_PROP_FRAME_WIDTH, 1280)
 
-
-
-
-
-
-ar = aruco()
-ar.LoadCalibration(r'D:\Dokumenty\SW\3D-gridboard-pose-estimation\GridboardLib\calibrationD435iPython2.pckl')
+arDetector = arucoDetector()
+arDetector.LoadCalibration(r'D:\Dokumenty\SW\3D-gridboard-pose-estimation\GridboardLib\calibrationD435iPython2.pckl')
 
 m0 = np.array([[1.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00],
                [0.00000000e+00, 1.00000000e+00, 0.00000000e+00, 0.00000000e+00],
@@ -57,9 +54,7 @@ m4 = np.array([[-4.37113900e-08, -1.00000000e+00, 0.00000000e+00, 0.00000000e+00
 effector = np.array([m0, m1, m2, m3, m4])
 ids = np.array([10, 11, 12, 13, 14])
 aruco_dict = aru.Dictionary_get(aru.DICT_6X6_1000)
-ar.Settings(aruco_dict, 0.07, ids, effector)
-
-
+arDetector.Settings(aruco_dict, 0.07, ids, effector)
 
 
 def GetImageFromRS():
@@ -69,9 +64,11 @@ def GetImageFromRS():
     color_image = np.asanyarray(color.get_data())
     return color_image
 
+
 def GetImageFromOpenCV():
     ret, img = capture.read()
     return img
+
 
 try:
     while (True):
@@ -80,7 +77,7 @@ try:
                 img = GetImageFromRS()
             except:
                 img = GetImageFromOpenCV()
-            ifdetect, image, _, _, _ = ar.DetectPoseOf3DGridboard(img)
+            ifdetect, image, _, _, _ = arDetector.DetectPoseOf3DGridboard(img)
             cv2.imshow('Image', image)
             ch = cv2.waitKey(1)
 except KeyboardInterrupt:

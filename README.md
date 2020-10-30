@@ -5,7 +5,17 @@
 ![GitHub last commit](https://img.shields.io/github/last-commit/robot-vsb-cz/3D-gridboard-pose-estimation) 
 ![GitHub](https://img.shields.io/github/license/robot-vsb-cz/3D-gridboard-pose-estimation)
 
-Aruco tag 3D gridboard pose estimation library
+3D Aruco gridboard pose estimation library
+
+Based on OpenCV ArUco tag detection.  
+
+For generate ArUco tag, you can used online generator: https://chev.me/arucogen/
+
+<p align="center">
+  <img src="images/Gridboard.jpg" width="350">
+  <img src="images/DetectedGridboard.png" width="350" >
+</p>
+
 
 #
 Created by 
