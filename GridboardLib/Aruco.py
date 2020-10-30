@@ -14,8 +14,8 @@ class ArucoDetector:
         self.distCoeffs = None
         self.parameters = aruco.DetectorParameters_create()
         self.parameters.cornerRefinementMinAccuracy = 1e-20
-        self.parameters.cornerRefinementMaxIterations = 100
-        self.parameters.cornerRefinementWinSize = 10
+        self.parameters.cornerRefinementMaxIterations = 1
+        self.parameters.cornerRefinementWinSize = 1
         self.parameters.cornerRefinementMethod = aruco.CORNER_REFINE_APRILTAG
         self.parameters.errorCorrectionRate = 0
         self.tfs = [None] * 1000
